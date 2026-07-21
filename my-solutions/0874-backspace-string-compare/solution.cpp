@@ -1,23 +1,18 @@
 class Solution {
 public:
     string process(string s) {
-        int i = 0;
-        while (i < s.length()) {
-              if (s[i] == '#') {
-                if (i == 0) {
-                    s.erase(i, 1);
+        string ans;
+        for(auto value : s){
+             if(value=='#'){
+                if(!ans.empty()){
+                   ans.pop_back();
                 }
-                else {
-                    s.erase(i - 1, 2);
-                }
-                i = max(0, i - 1);
             }
-            else {
-                i++;
+            else{
+                ans.push_back(value);
             }
-        }
-
-        return s;
+         }
+    return ans;
     }
     bool backspaceCompare(string s, string t) {
         s = process(s);
