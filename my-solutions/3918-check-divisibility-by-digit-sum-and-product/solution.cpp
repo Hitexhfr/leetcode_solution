@@ -1,11 +1,9 @@
 class Solution {
 public:
     bool checkDivisibility(int n) {
-        int temp = n;
-        int sum = 0;
-        int product = 1;
+        int temp = n,sum = 0,product = 1;
 
-        while(temp > 0) {
+        while(temp) {
             int digit = temp % 10;
             sum += digit;
             product *= digit;
