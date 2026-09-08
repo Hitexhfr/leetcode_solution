@@ -1,23 +1,20 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        char mapST[256] = {0};
-        char mapTS[256] = {0};
-
-        for (int i = 0; i < s.length(); i++) {
-            char a = s[i];
-            char b = t[i];
-
-            if (mapST[a] == 0 && mapTS[b] == 0) {
-                mapST[a] = b;
-                mapTS[b] = a;
+        vector <int> st(255,0);
+        vector <int> ts(255,0);
+        int counter = 1;
+        for(int i = 0;i<s.length();i++){
+            char a = s[i],b=t[i];
+            if(st[a]==0 && ts[b]==0){
+                st[a]=counter;ts[b]= counter;
+                counter++;
             }
-
-            else {
-                if (mapST[a] != b || mapTS[b] != a)
-                    return false;
+            else if(st[a]!=ts[b]){
+                return false;
             }
-        }    
+        }
+        
     return true;             
     }
 };
