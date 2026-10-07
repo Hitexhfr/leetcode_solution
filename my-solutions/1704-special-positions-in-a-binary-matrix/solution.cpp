@@ -1,25 +1,27 @@
 class Solution {
 public:
     int numSpecial(vector<vector<int>>& mat) {
-        int row = mat.size(),col= mat[0].size(),count = 0;
-        vector <int> rowcnt(row,0);vector <int> colcnt(col,0);
+        int m = mat.size(),n= mat[0].size();
+        int ans = 0;
 
-        for(int i = 0;i<row;i++){
-            for(int j = 0;j<col;j++){
-                if(mat[i][j]==1){
-                    rowcnt[i]++;
-                    colcnt[j]++;
-                }  
+        for(int i = 0;i<m;i++){
+            for(int j = 0;j<n;j++){
+                if(mat[i][j]!=1) continue;
+
+                bool isSpecial = true;
+                for(int row = 0;row<m;row++){
+                    if(row!=i && mat[row][j]==1){
+                        isSpecial = false;
+                  }
+               }
+                for(int col = 0;col<n;col++){
+                    if(col!=j && mat[i][col]==1){
+                        isSpecial = false;
+                  }
+               }
+               if(isSpecial) ans++;
             }
         }
-        for(int i = 0;i<row;i++){
-           for(int j = 0;j<col;j++){
-                if(mat[i][j]==1 && (rowcnt[i]==1 && colcnt[j]==1)){
-                    count++;
-            }
-          }
-        }
-        
-        return count;
+        return ans;
     }
 };
