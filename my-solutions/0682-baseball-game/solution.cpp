@@ -1,36 +1,35 @@
 class Solution {
 public:
     int calPoints(vector<string>& operations) {
-       stack<int> st;int sum = 0;
-       for(string s:operations){
-          if(s!= "C" && s!="D" && s!="+"){
-              int curr = stoi(s);
-              st.push(curr);
-              sum += curr;
-          }
-          else if(s=="C"){
-              int curr = st.top();
-              st.pop();
-              sum -= curr;
-          }
-          else if(s=="D"){
-             int last = st.top();
-             st.push(2*last);
-             sum += 2*last;
-          }
-          else{
-             int first = st.top();
-             st.pop();
-             int second = st.top();
+        int score = 0;
+        stack <int> st;
 
-             int curr_sum = first+second;
-
-             st.push(first);
-             st.push(curr_sum);
-
-             sum += curr_sum;
-           }
-       }
-       return sum;
+        for(auto s:operations){
+            if(s!= "D" && s!= "C" && s!="+"){
+                int curr = stoi(s);
+                st.push(curr);
+                score += curr;
+            }
+            else if(s=="C"){
+                int last = st.top();
+                st.pop();
+                score -= last;
+            }
+            else if(s=="D"){
+                int twice = 2*st.top();
+                st.push(twice);
+                score += twice;
+            }
+            else{
+                int last = st.top();
+                st.pop();
+                int second_last = st.top();
+                int sum = last + second_last;
+                st.push(last);
+                st.push(sum);
+                score += sum;
+            }
+        }
+        return score;
     }
 };
