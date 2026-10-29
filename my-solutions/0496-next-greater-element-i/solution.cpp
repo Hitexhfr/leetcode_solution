@@ -7,8 +7,7 @@ public:
                   idx = i;
                   break;
              }
-         }
-          
+        }
         for(int i = idx +1;i<n;i++){
             if(nums2[i]>x){
                 return nums2[i];
@@ -18,16 +17,12 @@ public:
    }
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         int n = nums1.size();
-        vector <int> res(n,-1);
         int i =0;
 
-        for(int x:nums1){
-            int value = nge(x,nums2);
-            if(value !=-1){
-                res[i] = value;
-            }
-            i++;
+        for(int i = 0;i<nums1.size();i++){
+            int value = nge(nums1[i],nums2);
+            nums1[i] = value;
         }
-        return res;
+        return nums1;
     }
 };
